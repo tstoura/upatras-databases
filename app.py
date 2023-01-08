@@ -1141,6 +1141,9 @@ def deleteSoloArtistSubmit(artistID):
     conn.execute("""delete from solo_artist where artist_id = (?);""",
             (artistID, ))
 
+    conn.execute("""delete from artist where artist_id = (?);""",
+            (artistID, ))
+
     conn.commit()
     conn.close()
     app.show_frame(deleteSoloArtistResults)
@@ -1245,6 +1248,9 @@ def deleteSongSubmit(songID):
     conn.execute("""delete from song where song_id = (?);""",
             (songID, ))
 
+    conn.execute("""delete from composed where song_id = (?);""",
+            (songID, ))
+
     conn.commit()
     conn.close()
     app.show_frame(deleteSongResults)
@@ -1293,7 +1299,7 @@ def deleteBandMemberSubmit(bandMemberID):
 
     conn = sqlite3.connect('Diskographiki.db')
     conn.execute("""delete from band where band_id = (?);""",
-            (bandMemberID))
+            (bandMemberID, ))
 
     conn.execute("""delete from belongs_to where band_id = (?);""",
             (bandMemberID, ))
@@ -1348,6 +1354,9 @@ def deleteAgentSubmit(agentID):
 
     conn = sqlite3.connect('Diskographiki.db')
     conn.execute("""delete from agent where agent_id = (?);""",
+            (agentID, ))
+
+    conn.execute("""delete from manages where agent_id = (?);""",
             (agentID, ))
 
     conn.commit()
@@ -1440,7 +1449,7 @@ class deleteAlbum(tk.Frame):
         buttonMainMenu.grid(row = 6, column = 0, ipady=5, ipadx=15, padx = 10, pady = 10)
 
         buttonSubmit = ttk.Button(self, text = "Submit",
-                    command = lambda: deleteBandSubmit(albumID.get()))
+                    command = lambda: deleteAlbumSubmit(albumID.get()))
 
         buttonSubmit.grid(row = 5, column = 2, ipady=5, ipadx=15, padx = 10, pady = 10)
 
