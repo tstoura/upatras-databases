@@ -3,11 +3,11 @@ PRAGMA journal_mode = MEMORY;
 BEGIN TRANSACTION;
 CREATE TABLE "CONTRACT" (
 	"contract_id"	integer NOT NULL,
-	"artist_id"	INTEGER,
-	"start_date"	date DEFAULT NULL,
+	"artist_id"	INTEGER NOT NULL,
+	"start_date"	date NOT NULL,
 	"end_date"	date DEFAULT NULL,
-	"sign_date"	date DEFAULT NULL,
-	"estimated_end"	date,
+	"sign_date"	date NOT NULL,
+	"estimated_end"	date NOT NULL,
 	CONSTRAINT "CONTRACT_pk" PRIMARY KEY("contract_id"),
 	CONSTRAINT "CONTRACT_fk0" FOREIGN KEY("artist_id") REFERENCES "ARTIST"("artist_id") ON DELETE CASCADE ON UPDATE CASCADE
 
@@ -33,10 +33,10 @@ CREATE TABLE "AGENT" (
 
 
 CREATE TABLE "MANAGES" (
-	"artist_id"	INTEGER,
-	"agent_id"	INTEGER,
-	"stat_date"	date,
-	"end_date"	date,
+	"artist_id"	INTEGER NOT NULL,
+	"agent_id"	INTEGER NOT NULL,
+	"stat_date"	date NOT NULL,
+	"end_date"	date DEFAULT NULL,
 	CONSTRAINT "MANAGES_fk0" FOREIGN KEY("artist_id") REFERENCES "ARTIST"("artist_id") ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT "MANAGES_fk1" FOREIGN KEY("agent_id") REFERENCES "AGENT"("agent_id") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -45,7 +45,7 @@ CREATE TABLE "MANAGES" (
 CREATE TABLE "ARTIST" (
 	"artist_id"	INTEGER NOT NULL,
 	"genre"	string DEFAULT NULL,
-	"Name"	TEXT,
+	"Name"	TEXT NOT NULL,
 	CONSTRAINT "ARTIST_pk" PRIMARY KEY("artist_id")
 );
 
@@ -71,17 +71,17 @@ CREATE TABLE "SOLO_ARTIST" (
 CREATE TABLE "BAND" (
 	"band_id"	integer NOT NULL,
 	"band_name"	string NOT NULL,
-	"formation_date"	date DEFAULT CURRENT_DATE,
+	"formation_date"	date DEFAULT NULL,
 	CONSTRAINT "BAND_pk" PRIMARY KEY("band_id"),
 	CONSTRAINT "BAND_fk0" FOREIGN KEY("band_id") REFERENCES ARTIST("artist_id")
 );
 
 CREATE TABLE "BELONGS_TO" (
-	"band_id"	INTEGER DEFAULT NULL,
-	"solo_artist_id"	INTEGER,
+	"band_id"	INTEGER NOT NULL,
+	"solo_artist_id" INTEGER NOT NULL,
 	"join_date"	date DEFAULT CURRENT_DATE,
 	"leave_date"	date DEFAULT NULL,
-	"role"	TEXT,
+	"role"	TEXT NOT NULL,
 	CONSTRAINT "BELONGS_TO_fk0" FOREIGN KEY("band_id") REFERENCES BAND("band_id")
 	CONSTRAINT "BELONGS_TO_fk1" FOREIGN KEY("solo_artist_id") REFERENCES SOLO_ARTIST("artist_id")
 
@@ -109,11 +109,11 @@ CREATE TABLE "RECORDS" (
 CREATE TABLE "RELEASE" (
 	"record_id"	integer NOT NULL,
 	"status"	TEXT DEFAULT NULL,
-	"studio_id"	integer DEFAULT NULL,
+	"studio_id"	integer NOT NULL,
 	"hrs_worked"	time NOT NULL,
 	"album_id"	integer DEFAULT NULL,
 	"track_no"	integer NOT NULL DEFAULT 0,
-	"release_date"	date,
+	"release_date"	date DEFAULT NULL,
 	CONSTRAINT "RELEASE_pk" PRIMARY KEY("record_id"),
 	CONSTRAINT "RELEASE_fk0" FOREIGN KEY("record_id") REFERENCES RECORDS("record_id") ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT "RELEASE_fk1" FOREIGN KEY("studio_id") REFERENCES STUDIO("studio_id") ON DELETE CASCADE ON UPDATE CASCADE,
@@ -125,10 +125,10 @@ CREATE TABLE "RELEASE" (
 CREATE TABLE "STUDIO" (
 	"studio_id"	integer NOT NULL,
 	"studio_name"	string NOT NULL,
-	"phone"	integer,
-	"street"	TEXT,
-	"city"	TEXT,
-	"area"	TEXT,
+	"phone"	integer NOT NULL,
+	"street" TEXT DEFAULT NULL,
+	"city"	TEXT DEFAULT NULL,
+	"area"	TEXT DEFAULT NULL,
 	"zip"	integer DEFAULT NULL,
 	"hrly_cost"	integer DEFAULT NULL,
 	CONSTRAINT "STUDIO_pk" PRIMARY KEY("studio_id")
