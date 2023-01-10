@@ -115,8 +115,7 @@ def addtosong():
     layout	=[	
         [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
         [sg.Text('songID',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
-        [sg.Text('songName',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
-        [sg.Text('length', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('songName',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],			
         [sg.Text('genre', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
         [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
     ]	
@@ -124,8 +123,8 @@ def addtosong():
     event,values=window.read()	
     if event=="-SUMBIT-":
         conn = sqlite3.connect('Diskographiki.db')
-        conn.execute("""insert into song values(?,?,?,?);""",
-            (int(values[0]),values[1],values[2],values[3]));
+        conn.execute("""insert into song values(?,?,?);""",
+            (int(values[0]),values[1],values[2]));
         conn.commit()
     conn.close()
     window.close()
@@ -209,7 +208,7 @@ def addtorelease():
     if event=="-SUMBIT-":
         conn = sqlite3.connect('Diskographiki.db')
         conn.execute("""insert into release values(?,?,?,?,?,?,?);""",
-            (int(values[0]),values[1],int(values[2]),int(values[3]),int(values[4]),int(values[5]),values[6]));
+            (int(values[0]),values[1],int(values[2]),int(values[3]),int(values[4]),values[5],values[6]));
         conn.commit()
     conn.close()
     window.close()
@@ -295,6 +294,27 @@ def addtobelongsto():
         conn.commit()
     conn.close()
     window.close()
+def execute_query():
+    conn = sqlite3.connect('Diskographiki.db')
+    cursor=conn.cursor();
+    print('QUERY 1: Artist that are now in a band')
+    cursor.execute('''SELECT a.artist_id, a.name,b.leave_date FROM artist as a join belongs_to as b on a.artist_id=b.solo_artist_id WHERE b.leave_date= 'NULL' ;''');
+    data=cursor.fetchall();
+    for	t in data:
+        print('\n')
+        for i in t:
+            print(str(i), end='   ');
+    print('\n')
+    print('QUERY 2: recordings that are released')
+    cursor.execute('''SELECT s.name,r.status FROM song as s join release as r on s.song_id=r.record_id where r.status='Unreleased'  ;''');
+    data=cursor.fetchall();
+    for	t in data:
+        print('\n')
+        for i in t:
+            print(str(i), end='   ');
+    print('\n')
+    
+    conn.close();
 def show_data(x):
     conn = sqlite3.connect('Diskographiki.db')
     cursor=conn.cursor();	
@@ -329,7 +349,7 @@ def add_data():
         if table=='album':
             addtoalbum()
         if table=='release':
-            addtorecords()
+            addtorelease()
         if table=='song':
             addtosong()
         if table=='writer':
@@ -341,10 +361,10 @@ def add_data():
         if table=='end':
             break
         else:
-            pass
+            print("no such table")
 def main():
     while(True):
-        opt=input("to insert data type 1\n to show data type 2\n to skip type 'end'\nplease type your choice:\n")
+        opt=input("to insert data type 1\n to show data type 2\n to form query type 3\n to skip type 'end'\nplease type your choice:\n")
         if opt=='end':
             break
         if opt=='1':
@@ -352,8 +372,10 @@ def main():
         if opt=='2':
             table=input("type the name of the table you want to showcase:\n")
             show_data(table)
+        if opt=='3':
+            execute_query()
         else:
-            pass
+            print('\ntype valid option\n')
             
     
 main()
