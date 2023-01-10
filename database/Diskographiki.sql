@@ -1,5 +1,3 @@
-PRAGMA synchronous = OFF;
-PRAGMA journal_mode = MEMORY;
 BEGIN TRANSACTION;
 CREATE TABLE "CONTRACT" (
 	"contract_id"	integer NOT NULL,
