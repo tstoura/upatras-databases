@@ -1,0 +1,359 @@
+import	sqlite3;
+import	PySimpleGUI	as	sg
+from datetime import datetime
+def addtoartist():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('artistID',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('genre',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('artist stage name', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(500,500))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into ARTIST values(?,?,?);""",
+            (int(values[0]),values[1],values[2]));
+        conn.commit()
+    conn.close()
+    window.close()
+
+def addtosoloartist():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('artistID',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('First Name',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('Middle Name', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Last Name', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('SSN', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Phone', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Street', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('City', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Birthdate', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('ZIP', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Sex', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(1000,700))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into solo_artist values(?,?,?,?,?,?,?,?,?,?,?);""",
+            (int(values[0]),values[1],values[2],values[3],int(values[4]),int(values[5]),values[6],values[7],values[8],int(values[9]),values[10]));
+        conn.commit()
+    conn.close()
+    window.close()
+    
+def addtoband():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('Band ID',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('Band name',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('Formation Date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(500,500))
+    event,values=window.read()
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into band values(?,?,?);""",
+            (int(values[0]),values[1],values[2]));
+        conn.commit()
+    conn.close()
+    window.close()
+
+def addtoagent():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('agentID',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('First Name',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('Middle Name', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Last Name', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('SSN', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Phone', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Street', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('City', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Birthdate', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('ZIP', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Sex', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(1000,700))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into agent values(?,?,?,?,?,?,?,?,?,?,?);""",
+            (int(values[0]),values[1],values[2],values[3],int(values[4]),int(values[5]),values[6],values[7],values[8],int(values[9]),values[10]));
+        conn.commit()
+    conn.close()
+    window.close()
+
+def addtocontract():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('contractID',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('artistID',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('start_date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('end_date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('sign_date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('estimated_end', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(500,500))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into conctract values(?,?,?,?,?,?);""",
+            (int(values[0]),int(values[1]),values[2],values[3],values[4],values[5]));
+        conn.commit()
+    conn.close()
+    window.close()
+
+def addtosong():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('songID',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('songName',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('length', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('genre', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(500,500))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into song values(?,?,?,?);""",
+            (int(values[0]),values[1],values[2],values[3]));
+        conn.commit()
+    conn.close()
+    window.close()
+
+def addtoalbum():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('album_id',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('date_released',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('unit_price', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(500,500))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into album values(?,?,?);""",
+            (int(values[0]),values[1],float(values[2])));
+        
+    conn.close()
+    window.close()
+
+def addtostudio():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('studio_id',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('studio_name',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('Phone', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Street', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('City', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],
+        [sg.Text('Area', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('zip', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('hourly cost', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(1000,700))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into studio values(?,?,?,?,?,?,?,?);""",
+            (int(values[0]),values[1],int(values[2]),values[3],values[4],values[5],int(values[6]),values[7]));
+        conn.commit()
+        
+    conn.close()
+    window.close()
+    
+def addtorecord():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('record_id',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('artist_id',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('bandName', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('start_date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('end_date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]
+    window=sg.Window("Data	Entry	Form",	layout,	size=(500,500))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into record values(?,?,?,?,?);""",
+            (int(values[0]),int(values[1]),values[2],values[3],values[4]));
+        conn.commit()
+    conn.close()
+
+
+def addtorelease():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('record_id',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('status',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('studio_id', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('hrs_worked', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],				
+        [sg.Text('album_id', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('track_no', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('release_date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]
+    window=sg.Window("Data	Entry	Form",	layout,	size=(500,500))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into release values(?,?,?,?,?,?,?);""",
+            (int(values[0]),values[1],int(values[2]),int(values[3]),int(values[4]),int(values[5]),values[6]));
+        conn.commit()
+    conn.close()
+    window.close()
+
+def addtowriter():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('artistID',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('First Name',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('Middle Name', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Last Name', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('SSN', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Phone', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Street', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('City', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],
+        [sg.Text('Area', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('Birthdate', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('ZIP', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('Sex', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],	[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(1000,700))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into writer values(?,?,?,?,?,?,?,?,?,?,?);""",
+            (int(values[0]),values[1],values[2],values[3],int(values[4]),int(values[5]),values[6],values[7],values[8],int(values[9]),values[10],values[11]));
+        conn.commit()
+    conn.close()
+    window.close()
+
+def addtomanages():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('artist id',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('agent id',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('stat date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('end date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(500,500))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into manages values(?,?,?,?);""",
+            (int(values[0]),int(values[1]),values[2],values[3]));
+        conn.commit()
+    conn.close()
+    window.close()
+def addtocomposed():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('song_id',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('writer_id',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('composition_date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(500,500))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into ARTIST values(?,?,?);""",
+            (int(values[0]),int(values[1]),values[2]));
+        conn.commit()
+    conn.close()
+    window.close()
+def addtobelongsto():
+    layout	=[	
+        [sg.Text('Please enter the following information',	font=("Courier",18))],[sg.VPush()],	
+        [sg.Text('band_id',size=(12,1), font=("Courier",18)), sg.InputText(font=("Courier", 18))],  [sg.VPush()],	
+        [sg.Text('solo_artist_id',  size=(12,1),font=("Courier",18)),sg.InputText(font=("Courier",18))], [sg.VPush()],	
+        [sg.Text('join_date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('leave_date', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Text('role', size=(12,1),font=("Courier",18)), sg.InputText(font=("Courier",18))], [sg.VPush()],		
+        [sg.Submit(key="-SUMBIT-",	font=("Courier",	18))],		[sg.VPush()]	
+    ]	
+    window=sg.Window("Data	Entry	Form",	layout,	size=(500,500))
+    event,values=window.read()	
+    if event=="-SUMBIT-":
+        conn = sqlite3.connect('Diskographiki.db')
+        conn.execute("""insert into belongs_to values(?,?,?,?,?);""",
+            (int(values[0]),int(values[1]),values[2],values[3],values[4]));
+        conn.commit()
+    conn.close()
+    window.close()
+def show_data(x):
+    conn = sqlite3.connect('Diskographiki.db')
+    cursor=conn.cursor();	
+    cursor.execute("select * from "+x);	
+    data=cursor.fetchall();		
+    for	t in data:
+        print('\n')
+        for i in t:
+            print(str(i), end='   ');
+    print('\n')
+    print('\n')
+    conn.close();
+def add_data():
+    while(True):      
+        table = input("Please the name of the table you want to insert data to:\n(to skip 'end')")
+        if table=='artist':
+            addtoartist()
+        if table=='solo_artist':
+            addtosoloartist()
+        if table=='band':
+            addtoband()
+        if table=='belongs_to':
+            addtobelongsto()
+        if table=='contract':
+            addtocontract()
+        if table=='agent':
+            addtoagent()
+        if table=='manages':
+            addtomanages()
+        if table=='composed':
+            addtocomposed()
+        if table=='album':
+            addtoalbum()
+        if table=='release':
+            addtorecords()
+        if table=='song':
+            addtosong()
+        if table=='writer':
+            addtowriter()
+        if table=='studio':
+            addtostudio()
+        if table=='records':
+            addtorecords()
+        if table=='end':
+            break
+        else:
+            pass
+def main():
+    while(True):
+        opt=input("to insert data type 1\n to show data type 2\n to skip type 'end'\nplease type your choice:\n")
+        if opt=='end':
+            break
+        if opt=='1':
+            add_data()
+        if opt=='2':
+            table=input("type the name of the table you want to showcase:\n")
+            show_data(table)
+        else:
+            pass
+            
+    
+main()
